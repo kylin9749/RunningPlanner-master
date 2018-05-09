@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <!-- 所需控件 -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="30dp"
+                android:textStyle="bold"
+                android:text="愉快不妨试试跑步：让心情来决定训练方式"
+                android:layout_gravity="center_horizontal"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="愤怒？试试自由搏击
+　　           高强度心脏机能训练，对排解闷气来说是绝佳选择。
+               忙碌一天后，你用出拳、肘击和踢腿来释放情绪。你会出一身大汗，把所有的不愉快留在体育馆，带着满满的
+               内啡肽离开。只是要记住：把怒火释放到健身锻炼中是好的
+               ，但务必确保身体一发出“停止”的指令，大脑就要服从—
+               —人们满怀强烈的负面情绪去锻炼时，受伤的几率要比正常
+               时高不少。"/>
+            <ImageView
+                android:layout_width="300dp"
+                android:layout_height="300dp"
+                android:id="@+id/news11"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:text="亢奋？试试训练营
+                想调动额外的资源挑战自我？
+                请参加那些定期举办的集体项目，甚至一些新概
+                念的训练营，和伙伴们抓起哑铃吧！提供高强度
+                间歇训练和循环训练项目的课程，不仅有益于心
+                血管健康，也有助于增进肌肉力量。这些效果随
+                着时间推移才会显现。事实上，许多人热爱训练
+                营，就是希望感受跟志同道合者一起完成最后一
+                组高难度动作后的那份欢愉。"/>
+            <ImageView
+                android:layout_width="300dp"
+                android:layout_height="300dp"
+                android:id="@+id/news12"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="愉快？试试跑步
+            要疏导体内的正能量，不妨去慢跑。
+            对那些不太喜欢跑步的人来说，你也许会发现内心的
+            乐观态度让自己的双腿增加了活力，使慢跑变得更有
+            乐趣，或至少更容易被接受。跑步已被证明能振作精
+            神、保护心脏，以及提高睡眠质量。高扬的情绪加上
+            肾上腺素的刺激，还有源源不绝的内啡肽，反过来也
+            会进一步延长好心情的持续时间。"/>
+            <ImageView
+                android:layout_width="300dp"
+                android:layout_height="300dp"
+                android:id="@+id/news13"/>
+
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:text="压抑？试试瑜伽
+　　             训练头脑的最好时机之一是在紧张、焦虑和担忧
+                 的时候。赶在一天结束前，从精神上、体力上和
+                 情感上舒缓身体的最佳方法就是去做瑜伽。这项
+                 需要聚精会神的锻炼有助于让你释放压力，从而
+                 换取晚间高质量的休息。专注于深度均匀的呼吸，
+                 你将重新找回生活的重心。" />
+            <ImageView
+                android:layout_width="300dp"
+                android:layout_height="300dp"
+                android:id="@+id/news14"/>
+<TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="悲伤？试试游泳
+            　　         把自己浸润在平静的蓝色池水中，让思绪随着你喜欢
+            的泳姿悠荡飘逸。当你以自己习惯的速率和节奏游泳，
+            你将有机会在精神上和身体上得到放松。游泳对身体
+            冲击较小，但也是绝好的锻炼心脏机能的方式。它使
+            你的心率加速，但对你的关节很友好。流动的水既使
+            你感到神清气爽，又使你倍感安逸舒适。有些人甚至
+            主张，游泳有助于缓解抑郁症。"/>
+            <ImageView
+                android:layout_width="300dp"
+                android:layout_height="300dp"
+                android:id="@+id/news15"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:text="慵懒？试试骑行
+　　             踏上自行车，骑向身体想带你去的任何地方。无
+                需多大的能量，你只靠两只脚踏板就能收获有氧
+                运动、观景和清新空气所带来的巨大好处。再说，
+                骑行客通常比不骑车的人更健康、更自立、寿命
+                更长。所以，沿着河岸骑行，或骑车穿过小镇，
+                去寻找快乐吧。
+"/>
+            <ImageView
+                android:layout_width="300dp"
+                android:layout_height="300dp"
+                android:id="@+id/news16"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="冲动？试试远足
+　　         顺从心中的探险之魂，抓起背包，踏上全新的郊
+            野之路，让身体和心智经受双重挑战。徒步旅行，
+            几乎可以调动体内的全部肌肉，何况，单是得到
+            与大自然亲近的机会这一点，就值得你神侃一番。
+            徒步客更具创造性、更快乐、更专注，所以，做
+            个地球之子，去探险吧！"/>
+            <ImageView
+                android:layout_width="300dp"
+                android:layout_height="300dp"
+                android:id="@+id/news17"/>
+<TextView
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:text="如果你试图说服自己放弃今
+            天的健身计划，那请多给自己一点重新考虑的时间。
+            　　             问题可能不在于你厌恶锻炼，而在于你选择的锻炼
+            方式与你当下的心态不搭调。试想，如果你心里想
+            做的事情是读一本好书或品一杯好酒，你今晚就不
+            会选择去夜店，对不对？同样的逻辑也适用于健身：
+            让自己从事的运动与自己的情绪匹配，是激励你坚
+            持锻炼的最好方法，由此，你会真切地享受到锻炼
+            带来的益处，而非心不在焉地消磨时间。 "/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="简而言之，无论心中的感觉如何，
+                你总有办法确保自我意识为你所用，而非成为你的
+                羁绊。今后，一旦出去锻炼的念头使你萎靡不振，
+                而不是让你渴望穿上装备出发，就请先琢磨一下自
+                己当时的情绪，然后用上文所推荐的健身项目与之
+                匹配，这非常值得一试。"/>
+
+
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>
