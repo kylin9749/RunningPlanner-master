@@ -30,8 +30,8 @@
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/github"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
         android:src="@mipmap/githubblue"
         android:layout_marginBottom="20dp"
         android:layout_gravity="center_horizontal"/>

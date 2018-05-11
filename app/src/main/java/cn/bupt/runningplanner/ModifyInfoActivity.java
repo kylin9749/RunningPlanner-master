@@ -26,42 +26,59 @@ public class ModifyInfoActivity extends AlertableAppCompatActivity {
                     break;
                 case R.id.modify_cancel:
                     intent = new Intent();
-
+                    intent.setClass(self, BodyActivity.class);
+                    startActivity(intent);
+                    finish();
                     break;
                 case R.id.modify_finish:
                     intent = new Intent();
                     changeInfo();
+                    intent.setClass(self, BodyActivity.class);
+                    startActivity(intent);
+                    finish();
                     break;
                 default:
-                    if (intent != null) {
-                        intent.setClass(self, ModifyInfoActivity.class);
-                        startActivity(intent);
-                        finish();
-                    }
                     break;
             }
         }
     };
 
     private void changeInfo() {
-        if (title == "昵称") {
 
+        if (title == "昵称") {
+            String name = ((EditText)findViewById(R.id.modify_origin)).getText().toString();
         }
+
         else if (title == "年龄") {
             try {
                 int age = Integer.parseInt(((EditText)findViewById(R.id.modify_origin)).getText().toString());
+                if (age <= 0 || age >= 100)
+                    alert(new AlertMessage("请正确输入年龄", ""));
             } catch (Exception ex) {
                 alert(new AlertMessage("请正确输入年龄", ""));
             }
         }
-        else if (title == "性别") {
 
-        }
         else if (title == "身高(CM)") {
-
+            try {
+                int height = Integer.parseInt(((EditText) findViewById(R.id.modify_origin)).getText().toString());
+                if (height <= 100 || height >= 250) {
+                    alert(new AlertMessage("请正确输入身高", ""));
+                }
+            } catch (Exception ex) {
+                alert(new AlertMessage("请正确输入身高", ""));
+            }
         }
-        else if (title == "体重(KG)") {
 
+        else if (title == "体重(KG)") {
+            try {
+                int weight = Integer.parseInt(((EditText) findViewById(R.id.modify_origin)).getText().toString());
+                if (weight <= 0 || weight >= 500) {
+                    alert(new AlertMessage("请正确输入体重", ""));
+                }
+            } catch (Exception ex) {
+                alert(new AlertMessage("请正确输入体重", ""));
+            }
         }
     }
 
@@ -78,68 +95,3 @@ public class ModifyInfoActivity extends AlertableAppCompatActivity {
         ((ImageView)findViewById(R.id.modify_delete)).setOnClickListener(onClickListener);
     }
 }
-
-
-
-//            switch (v.getId()) {
-//                case R.id.btn_savedata:
-//                    int age, weight, height;
-
-//
-//                    if (age <= 0 || age >= 100) {
-//                        alert(new AlertMessage("请正确输入年龄", ""));
-//                        break;
-//                    }
-//
-//                    try {
-//                        weight = Integer.parseInt(((EditText) findViewById(R.id.input_weight)).getText().toString());
-//                    } catch (Exception ex) {
-//                        alert(new AlertMessage("请正确输入体重", ""));
-//                        break;
-//                    }
-//
-//                    if (weight <= 0 || weight >= 500) {
-//                        alert(new AlertMessage("请正确输入体重", ""));
-//                        break;
-//                    }
-//
-//                    try {
-//                        height = Integer.parseInt(((EditText) findViewById(R.id.input_height)).getText().toString());
-//                    } catch (Exception ex) {
-//                        alert(new AlertMessage("请正确输入身高", ""));
-//                        break;
-//                    }
-//
-//                    if (height <= 100 || height >= 250) {
-//                        alert(new AlertMessage("请正确输入身高", ""));
-//                        break;
-//                    }
-//
-//
-//                    info.name=((EditText)findViewById(R.id.input_name)).getText().toString();
-//                    info.age = age;
-//                    info.weight = weight;
-//                    info.height = height;
-//
-//                    String mail="123456789@qq.com";
-//                    SharedPreferences pref = getSharedPreferences("data", Context.MODE_PRIVATE);
-//                    mail= pref.getString("email","123456789@qq.com");
-//                    SQLiteDatabase db = helper.getWritableDatabase();
-//                    Cursor cursor = db.rawQuery("select * from PersonInformation where Email=?", new String[]{mail});
-//                    boolean result =cursor.moveToNext();
-//
-//                    if(result){
-//                        db.execSQL("UPDATE PersonInformation SET userName=?,Age=?,Weight=?,High=?,Sex=? where Email=?", new Object[]{info.name, info.age, info.weight, info.height,info.sex,mail});
-//                        cursor.close();
-//                        db.close();
-//                    }
-//
-//                    Intent intent = new Intent();
-//                    intent.setClass(self, MainActivity.class);
-//                    startActivity(intent);
-//                    finish();
-//                    break;
-//                default:
-//                    break;
-//            }
-//        }
