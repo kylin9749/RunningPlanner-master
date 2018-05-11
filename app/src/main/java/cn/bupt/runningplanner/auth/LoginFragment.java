@@ -92,13 +92,12 @@ public class LoginFragment extends Fragment implements View.OnClickListener{
             }
 
             //向服务器发送数据请求数据查询的匹配
-            HttpUtil.sendOkHttpRequest("http://114.115.154.47:8080/RunningPlanner/auth",jsonContext,new okhttp3.Callback() {
+            HttpUtil.sendOkHttpRequest("http://10.128.202.97:8080/auth",jsonContext,new okhttp3.Callback() {
                 @Override
                 public void onFailure(Call call, IOException e) {
                     Looper.prepare();
                     Toast.makeText(getContext(),"网络开小差咯，请检查网络连接",Toast.LENGTH_SHORT).show();
                     Looper.loop();
-                    MESSAGR = 0;
                 }
 
                 @Override
