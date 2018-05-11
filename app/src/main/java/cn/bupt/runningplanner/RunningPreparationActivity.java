@@ -26,6 +26,7 @@ public class RunningPreparationActivity extends AlertableAppCompatActivity {
     private RunningPreparationActivity self = this;
     private double longitude;
     private double latitude;
+
     private String address;
     private AMapLocationListener aMapLocationListener = new AMapLocationListener() {
         @Override
