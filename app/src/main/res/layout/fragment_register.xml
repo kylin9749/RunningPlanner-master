@@ -41,7 +41,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="Sign up for all users"
+            android:text="注册"
             android:textColor="@color/white"
             android:textSize="20dp" />
     </LinearLayout>
@@ -63,7 +63,7 @@
             android:layout_height="wrap_content"
             android:drawableLeft="@mipmap/username"
             android:drawablePadding="7dp"
-            android:hint="Your Name"
+            android:hint="  你的昵称"
             android:textColor="@color/white"
             android:textSize="15dp"
             app:met_baseColor="@color/white"
@@ -81,7 +81,7 @@
             android:layout_height="wrap_content"
             android:drawableLeft="@mipmap/email"
             android:drawablePadding="7dp"
-            android:hint="Your Email"
+            android:hint="  你的电子邮箱"
             android:textColor="@color/white"
             android:textSize="15dp"
             app:met_baseColor="@color/white"
@@ -99,7 +99,7 @@
             android:layout_height="wrap_content"
             android:drawableLeft="@mipmap/password"
             android:drawablePadding="7dp"
-            android:hint="Your Password"
+            android:hint="  你的密码"
             android:inputType="textPassword"
             android:textColor="@color/white"
             android:textSize="15dp"
@@ -126,7 +126,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="#FF5F9AF9"
-            android:text="Register"
+            android:text="注册"
             android:textAllCaps="false"
             android:textColor="@color/white"
             android:textSize="15dp"
@@ -146,7 +146,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="#00000000"
-            android:text="Sign In"
+            android:text="登陆"
             android:textAllCaps="false"
             android:textColor="@color/colorAccent" />
     </LinearLayout>

@@ -5,7 +5,9 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;;
+import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.os.Environment;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -20,8 +22,13 @@ import com.google.gson.Gson;
 import cn.bupt.runningplanner.classes.HomePage.alert.AlertableAppCompatActivity;
 import cn.bupt.runningplanner.classes.HomePage.run.RunningData;
 import cn.bupt.runningplanner.classes.HomePage.user.UserInfo;
-import java.text.DecimalFormat;
 
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 
 import retrofit2.Call;
@@ -47,6 +54,52 @@ public class RunningFinishActivity extends AlertableAppCompatActivity {
                     startActivity(intent);
                     finish();
                     break;
+                case R.id.qqshare:
+                    map.getMapScreenShot(new AMap.OnMapScreenShotListener() {
+                        @Override
+                        public void onMapScreenShot(Bitmap bitmap) {
+
+                        }
+
+                        @Override
+                        public void onMapScreenShot(Bitmap bitmap, int status) {
+                            SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
+                            if (null == bitmap) {
+                                return;
+                            }
+                            try {
+                                FileOutputStream fos = new FileOutputStream(
+                                        Environment.getExternalStorageDirectory() + "/test_"
+                                                + sdf.format(new Date()) + ".png");
+                                boolean b = bitmap.compress(Bitmap.CompressFormat.PNG, 100, fos);
+                                try {
+                                    fos.flush();
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                }
+                                try {
+                                    fos.close();
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                }
+                                StringBuffer buffer = new StringBuffer();
+                                if (b)
+                                    buffer.append("截屏成功 ");
+                                else {
+                                    buffer.append("截屏失败 ");
+                                }
+                                if (status != 0)
+                                    buffer.append("地图渲染完成，截屏无网格");
+                                else {
+                                    buffer.append("地图未渲染完成，截屏有网格");
+                                }
+//                                ToastUtil.show(getApplicationContext(), buffer.toString());
+                            } catch (FileNotFoundException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    });
+                    break;
                 default:
                     break;
             }
@@ -60,7 +113,24 @@ public class RunningFinishActivity extends AlertableAppCompatActivity {
 
         this.runningData = new Gson().fromJson(getIntent().getStringExtra("running_data"), RunningData.class);
 
+        // 显示完成后的运动路线
+        ((MapView) findViewById(R.id.finish_map)).onCreate(savedInstanceState);
+        this.map = ((MapView) findViewById(R.id.finish_map)).getMap();
+        PolylineOptions polylineOptions = new PolylineOptions();
+        polylineOptions.setPoints(runningData.ployPoints);
+        this.map.addPolyline(polylineOptions);
+        MarkerOptions startMarker = new MarkerOptions().position(runningData.ployPoints.get(0));
+        MarkerOptions endMarker = new MarkerOptions().position(runningData.ployPoints.get(runningData.ployPoints.size() - 1));
+        this.map.addMarker(startMarker);
+        this.map.addMarker(endMarker);
+        this.map.moveCamera(CameraUpdateFactory.changeLatLng(runningData.centerPoint));
+        this.map.moveCamera(CameraUpdateFactory.zoomTo(16));
+        this.map.getUiSettings().setAllGesturesEnabled(false);
+        this.map.getUiSettings().setZoomControlsEnabled(false);
+
+
         info.weight = getIntent().getIntExtra("user_weight", 0);
+
 
         ((TextView) findViewById(R.id.length_text_view)).setText("" + runningData.length + "米");
         ((TextView) findViewById(R.id.time_text_view)).setText(timeFormat(runningData.endTime - runningData.startTime));
