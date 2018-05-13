@@ -11,7 +11,7 @@ import com.ashokvarma.bottomnavigation.BottomNavigationBar;
 import com.ashokvarma.bottomnavigation.BottomNavigationItem;
 import cn.bupt.runningplanner.fragment.HomePageFragment;
 import cn.bupt.runningplanner.fragment.MovieFragment;
-import cn.bupt.runningplanner.fragment.MusicFragment;
+import cn.bupt.runningplanner.fragment.MainFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationB
     //初始化ViewPager
     private void initViewPager() {
         mList = new ArrayList<>();
-        mList.add(new MusicFragment());
+        mList.add(new MainFragment());
         mList.add(new HomePageFragment());
         mList.add(new MovieFragment());
 

@@ -1,9 +1,9 @@
 package cn.bupt.runningplanner.auth;
 
-import android.content.Context;
+import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
-import android.net.Uri;
 import android.os.Bundle;
+import android.os.Looper;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -13,11 +13,19 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import cn.bupt.runningplanner.LoginandRegister;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import cn.bupt.runningplanner.MainActivity;
 import cn.bupt.runningplanner.R;
+import cn.bupt.runningplanner.Util.HttpUtil;
+import cn.bupt.runningplanner.entity.Result;
+import cn.bupt.runningplanner.entity.UserRegisterInfo;
+import okhttp3.Call;
+import okhttp3.Response;
 
 import org.json.JSONObject;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Matcher;
@@ -73,23 +81,54 @@ public class RegisterFragment extends Fragment implements View.OnClickListener{
         }
     }
 
+    private String jsonContext;
+    private ObjectMapper mapper;
     private void register(String namestr, String emailstr, String paswordstr) {
         Boolean is_validate = validate(namestr, emailstr, paswordstr);
 
         //进行post请求
         if (is_validate) {
 
-            SQLiteDatabase db= helper.getWritableDatabase();
 
             //获取注册信息
-            String mail=((EditText)view.findViewById(R.id.email_register)).getText().toString();
-            String username=((EditText)view.findViewById(R.id.name_register)).getText().toString();
-            String password=((EditText)view.findViewById(R.id.password_register)).getText().toString();
-            db.execSQL("insert into PersonInformation(Email,UserName,Password) values(?,?,?)",new Object[]{mail,username,password});
-            //System.out.println("注册成功！");
-            db.close();
-            Toast.makeText(getContext(), "注册成功!", Toast.LENGTH_SHORT).show();
-            getFragmentManager().beginTransaction().replace(R.id.usermainfragment, new LoginFragment()).commit();
+            UserRegisterInfo userRegisterInfo = new UserRegisterInfo();
+            userRegisterInfo.setEmail(((EditText)view.findViewById(R.id.email_register)).getText().toString());
+            userRegisterInfo.setName(((EditText)view.findViewById(R.id.name_register)).getText().toString());
+            userRegisterInfo.setPassword(((EditText)view.findViewById(R.id.password_register)).getText().toString());
+
+            //将注册信息转换成json格式发送个服务器端用以验证
+            try {
+                mapper = new ObjectMapper();
+                jsonContext = mapper.writeValueAsString(userRegisterInfo);
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+            HttpUtil.sendOkHttpRequest("http://10.128.202.97:8080/register",jsonContext,new okhttp3.Callback(){
+
+                @Override
+                public void onFailure(Call call, IOException e) {
+                    Looper.prepare();
+                    Toast.makeText(getContext(),"网络开小差咯，请检查网络连接",Toast.LENGTH_SHORT).show();
+                    Looper.loop();
+                }
+
+                @Override
+                public void onResponse(Call call, Response response) throws IOException {
+                    Result result = mapper.readValue(response.body().byteStream(), Result.class);
+                    if (result.getResultCode() == Result.SUCCESS) {
+                        Looper.prepare();
+                        Toast.makeText(getContext(), "注册成功!", Toast.LENGTH_SHORT).show();
+                        getFragmentManager().beginTransaction().replace(R.id.usermainfragment, new LoginFragment()).commit();
+                        Looper.loop();
+                    } else {
+                        Looper.prepare();
+                        Toast.makeText(getContext(), "当前邮箱已被注册，请重新输入", Toast.LENGTH_SHORT).show();
+                        Looper.loop();
+                    }
+                }
+            });
+
+
 
 
 
