@@ -12,6 +12,12 @@ public class UserInfo {
     private int totalTime;
     private int totalCalorie;
     private int number;
+    //判断返回i结果的
+    private int resultCode;
+    //判断上传数据的源  来自哪里
+    private int updateSource;
+    // 1代表跑步完成界面
+    // 0代表更新用户信息界面
 
     public String getName() {
         return name;
@@ -99,5 +105,21 @@ public class UserInfo {
 
     public void setNumber(int number) {
         this.number = number;
+    }
+
+    public int getResultCode() {
+        return resultCode;
+    }
+
+    public void setResultCode(int resultCode) {
+        this.resultCode = resultCode;
+    }
+
+    public int getUpdateSource() {
+        return updateSource;
+    }
+
+    public void setUpdateSource(int updateSource) {
+        this.updateSource = updateSource;
     }
 }

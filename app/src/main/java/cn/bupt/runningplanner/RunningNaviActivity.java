@@ -152,9 +152,9 @@ public class RunningNaviActivity extends AlertableAppCompatActivity {
         aMapLocationClient.setLocationOption(aMapLocationClientOption);
         aMapLocationClient.startLocation();
 
-        ((Button) findViewById(R.id.debug_button)).setOnClickListener(onClickListener);
-        ((Button) findViewById(R.id.navi_finish_button)).setOnClickListener(onClickListener);
-        ((TextView) findViewById(R.id.navi_length_text_view)).setOnClickListener(onClickListener);
+        ( findViewById(R.id.debug_button)).setOnClickListener(onClickListener);
+        ( findViewById(R.id.navi_finish_button)).setOnClickListener(onClickListener);
+        ( findViewById(R.id.navi_length_text_view)).setOnClickListener(onClickListener);
 
 
         ((Chronometer) findViewById(R.id.chronometer)).setFormat("时间：%s");
