@@ -60,6 +60,7 @@ public class ModifyInfoActivity extends AlertableAppCompatActivity {
         }
     };
 
+
     private void changeInfo() {
         //通过http将数据写入数据库
         SharedPreferences preferences = getSharedPreferences("userInfo",MODE_PRIVATE);

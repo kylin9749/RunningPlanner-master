@@ -37,7 +37,7 @@ public class RunningNaviActivity extends AlertableAppCompatActivity {
     private ArrayList<LatLng> pathPoints = new ArrayList<LatLng>();
     private long startTime;
     private long endTime;
-    private double tempLength = 10.0;
+    private double tempLength = 0.0;
     private static final double CLOSE_LIMINAL = 100.0;
     static int testCounter = 0;
     private int debugTriggerCounter = 0;
@@ -168,8 +168,9 @@ public class RunningNaviActivity extends AlertableAppCompatActivity {
                 naviMap.addMarker(new MarkerOptions().position(new LatLng(aMapLocation.getLatitude(), aMapLocation.getLongitude())));
                 naviMap.moveCamera(CameraUpdateFactory.changeLatLng(new LatLng(aMapLocation.getLatitude(), aMapLocation.getLongitude())));
                 naviMap.moveCamera(CameraUpdateFactory.zoomTo(159));
-                tempLength = LatLngCalculate.getPathLength(pathPoints)+10;
+                tempLength = LatLngCalculate.getPathLength(pathPoints);
                 ((TextView) findViewById(R.id.navi_length_text_view)).setText((int) tempLength + "米");
+                ((TextView) findViewById(R.id.navi_step_text_view)).setText((int)(tempLength * 2.875) + "步");
             }
         };
         aMapLocationClient = new AMapLocationClient(this);
