@@ -77,7 +77,7 @@ public class HistoryActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        HttpUtil.sendOkHttpRequest("http://"+ Constants.url+":8080/showHistory",jsonContext, new okhttp3.Callback() {
+        HttpUtil.sendOkHttpRequest("http://"+ Constants.url+"/showHistory",jsonContext, new okhttp3.Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
                 Looper.prepare();

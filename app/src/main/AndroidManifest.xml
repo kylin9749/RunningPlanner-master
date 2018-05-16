@@ -45,10 +45,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".MainActivity" android:launchMode="singleTask" />
-        <activity android:name=".Dialog" android:theme="@style/MyDialogStyle">
+        <activity android:name=".Dialog">
             <intent-filter>
                 <action android:name="cn.bupt.runningplanner.ACTION_START" />
-
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>

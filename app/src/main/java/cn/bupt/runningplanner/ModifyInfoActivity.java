@@ -1,6 +1,8 @@
 package cn.bupt.runningplanner;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Looper;
 import android.view.View;
@@ -60,6 +62,8 @@ public class ModifyInfoActivity extends AlertableAppCompatActivity {
 
     private void changeInfo() {
         //通过http将数据写入数据库
+        SharedPreferences preferences = getSharedPreferences("userInfo",MODE_PRIVATE);
+        @SuppressLint("CommitPrefEdits") SharedPreferences.Editor editor = preferences.edit();
         cn.bupt.runningplanner.entity.UserInfo userInfoWrite = new cn.bupt.runningplanner.entity.UserInfo();
         userInfoWrite.setEmail(email);
             switch (title) {
@@ -67,6 +71,7 @@ public class ModifyInfoActivity extends AlertableAppCompatActivity {
                     String name = ((EditText) findViewById(R.id.modify_origin)).getText().toString();
                     userInfoWrite.setName(name);
                     userInfoWrite.setUpdateSource(2);//设定数据源为修改name
+                    editor.putString("name",name);
                     break;
                 case "年龄":
                     try {
@@ -75,6 +80,7 @@ public class ModifyInfoActivity extends AlertableAppCompatActivity {
                             Toast.makeText(ModifyInfoActivity.this,"请正确输入年龄",Toast.LENGTH_SHORT).show();
                         userInfoWrite.setAge(age);
                         userInfoWrite.setUpdateSource(3);//设定数据源为修改age
+                        editor.putInt("age",age);
                     } catch (Exception ex) {
                         Toast.makeText(ModifyInfoActivity.this,"请正确输入年龄",Toast.LENGTH_SHORT).show();
                     }
@@ -87,6 +93,7 @@ public class ModifyInfoActivity extends AlertableAppCompatActivity {
                         }
                         userInfoWrite.setHigh(height);
                         userInfoWrite.setUpdateSource(4);//设定数据源为修改height
+                        editor.putInt("high",height);
                     } catch (Exception ex) {
                         Toast.makeText(ModifyInfoActivity.this,"请正确输入身高 ",Toast.LENGTH_SHORT).show();
                     }
@@ -99,6 +106,7 @@ public class ModifyInfoActivity extends AlertableAppCompatActivity {
                         }
                         userInfoWrite.setWeight(weight);
                         userInfoWrite.setUpdateSource(5);//设定数据源为修改name
+                        editor.putInt("weight",weight);
                     } catch (Exception ex) {
                         Toast.makeText(ModifyInfoActivity.this,"请正确输入体重",Toast.LENGTH_SHORT).show();
                     }
@@ -106,14 +114,14 @@ public class ModifyInfoActivity extends AlertableAppCompatActivity {
                 default:
                     break;
         }
-
+        editor.apply();
         try {
             mapper = new ObjectMapper();
             jsonContext =mapper.writeValueAsString(userInfoWrite);
         } catch (JsonProcessingException e) {
             e.printStackTrace();
         }
-        HttpUtil.sendOkHttpRequest("http://"+ Constants.url+":8080/update",jsonContext, new okhttp3.Callback() {
+        HttpUtil.sendOkHttpRequest("http://"+ Constants.url+"/update",jsonContext, new okhttp3.Callback() {
             @Override
             public void onFailure(okhttp3.Call call, IOException e) {
                 Looper.prepare();

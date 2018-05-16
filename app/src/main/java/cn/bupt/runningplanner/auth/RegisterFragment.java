@@ -104,7 +104,7 @@ public class RegisterFragment extends Fragment implements View.OnClickListener{
             }catch (Exception e){
                 e.printStackTrace();
             }
-            HttpUtil.sendOkHttpRequest("http://"+ Constants.url+":8080/register",jsonContext,new okhttp3.Callback(){
+            HttpUtil.sendOkHttpRequest("http://"+ Constants.url+"/register",jsonContext,new okhttp3.Callback(){
 
                 @Override
                 public void onFailure(Call call, IOException e) {

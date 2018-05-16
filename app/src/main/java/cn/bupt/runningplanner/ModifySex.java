@@ -74,7 +74,7 @@ public class ModifySex extends AppCompatActivity {
         } catch (JsonProcessingException e) {
             e.printStackTrace();
         }
-        HttpUtil.sendOkHttpRequest("http://"+ Constants.url+":8080/update",jsonContext, new okhttp3.Callback() {
+        HttpUtil.sendOkHttpRequest("http://"+ Constants.url+"/update",jsonContext, new okhttp3.Callback() {
             @Override
             public void onFailure(okhttp3.Call call, IOException e) {
                 Looper.prepare();

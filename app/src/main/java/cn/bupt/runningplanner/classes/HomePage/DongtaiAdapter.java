@@ -50,6 +50,7 @@ public class DongtaiAdapter extends RecyclerView.Adapter<DongtaiAdapter.ViewHold
                 DongtaiItem fruit = mItemList.get(position);
 
                 Intent intent=new Intent(mContext,Dialog.class);//你要跳转的界面
+                intent.putExtra("position",position);
                 mContext.startActivity(intent);
             }
         });
@@ -60,6 +61,18 @@ public class DongtaiAdapter extends RecyclerView.Adapter<DongtaiAdapter.ViewHold
                 DongtaiItem fruit = mItemList.get(position);
                // Toast.makeText(v.getContext(), "you clicked image " + fruit.getName(), Toast.LENGTH_SHORT).show();
                 Intent intent=new Intent(mContext,Dialog.class);//你要跳转的界面
+                intent.putExtra("position",position);
+                mContext.startActivity(intent);
+            }
+        });
+        holder.textView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int position = holder.getAdapterPosition();
+                DongtaiItem fruit = mItemList.get(position);
+
+                Intent intent=new Intent(mContext,Dialog.class);//你要跳转的界面
+                intent.putExtra("position",position);
                 mContext.startActivity(intent);
             }
         });

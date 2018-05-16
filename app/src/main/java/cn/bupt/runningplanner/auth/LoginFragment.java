@@ -116,9 +116,8 @@ public class LoginFragment extends Fragment implements View.OnClickListener{
             }catch (Exception e){
                 e.printStackTrace();
             }
-            System.out.println("http://"+ Constants.url+":8080/auth");
             //向服务器发送数据请求数据查询的匹配
-            HttpUtil.sendOkHttpRequest("http://"+ Constants.url+":8080/auth",jsonContext,new okhttp3.Callback() {
+            HttpUtil.sendOkHttpRequest("http://"+ Constants.url+"/auth",jsonContext,new okhttp3.Callback() {
                 @Override
                 public void onFailure(Call call, IOException e) {
                     Looper.prepare();

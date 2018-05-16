@@ -169,7 +169,7 @@ public class RunningNaviActivity extends AlertableAppCompatActivity {
                 naviMap.moveCamera(CameraUpdateFactory.changeLatLng(new LatLng(aMapLocation.getLatitude(), aMapLocation.getLongitude())));
                 naviMap.moveCamera(CameraUpdateFactory.zoomTo(159));
                 tempLength = LatLngCalculate.getPathLength(pathPoints)+10;
-                ((TextView) findViewById(R.id.navi_length_text_view)).setText("里程：" + (int) tempLength + "米");
+                ((TextView) findViewById(R.id.navi_length_text_view)).setText((int) tempLength + "米");
             }
         };
         aMapLocationClient = new AMapLocationClient(this);

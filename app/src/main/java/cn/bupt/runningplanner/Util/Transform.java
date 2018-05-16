@@ -18,13 +18,13 @@ import cn.bupt.runningplanner.MainActivity;
 
 public class Transform {
     //将图片转换成字节流
-    public byte[] setPicture(int id)
-    {
-        Bitmap bitmap= BitmapFactory.decodeResource(Dialog.res,id);
-        ByteArrayOutputStream outputStream=new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.PNG,100,outputStream);
-        return outputStream.toByteArray();
-    }
+//    public byte[] setPicture(int id)
+//    {
+//        Bitmap bitmap= BitmapFactory.decodeResource(Dialog.res,id);
+//        ByteArrayOutputStream outputStream=new ByteArrayOutputStream();
+//        bitmap.compress(Bitmap.CompressFormat.PNG,100,outputStream);
+//        return outputStream.toByteArray();
+//    }
 
     //将字节流转换成图片
     public BitmapDrawable getPicture(byte[] b)

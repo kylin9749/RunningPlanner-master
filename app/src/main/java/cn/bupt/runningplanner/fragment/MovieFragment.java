@@ -66,6 +66,9 @@ public class MovieFragment extends Fragment implements View.OnClickListener {
                 startActivity(new Intent(getContext(),HistoryActivity.class));
                 break;
             case R.id.logout_button:
+                SharedPreferences.Editor editor = getContext().getSharedPreferences("userInfo",Context.MODE_PRIVATE).edit();
+                editor.putBoolean("remember_password", false);
+                editor.apply();
                 startActivity(new Intent(getContext(),LoginandRegister.class));
                 break;
         }

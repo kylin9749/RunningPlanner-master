@@ -77,7 +77,7 @@ public class MainFragment extends Fragment implements View.OnClickListener {
             e.printStackTrace();
         }
 
-        HttpUtil.sendOkHttpRequest("http://"+ Constants.url+":8080/show",jsonContext,new okhttp3.Callback() {
+        HttpUtil.sendOkHttpRequest("http://"+ Constants.url+"/show",jsonContext,new okhttp3.Callback() {
 
             @Override
             public void onFailure(Call call, IOException e) {

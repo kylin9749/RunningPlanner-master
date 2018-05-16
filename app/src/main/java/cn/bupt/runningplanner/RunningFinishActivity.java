@@ -137,7 +137,7 @@ public class RunningFinishActivity extends AlertableAppCompatActivity {
         }
 
         //更新用户信息表
-        HttpUtil.sendOkHttpRequest("http://"+ Constants.url+":8080/update",jsonContext, new okhttp3.Callback() {
+        HttpUtil.sendOkHttpRequest("http://"+ Constants.url+"/update",jsonContext, new okhttp3.Callback() {
             @Override
             public void onFailure(okhttp3.Call call, IOException e) {
                 Looper.prepare();
@@ -162,7 +162,7 @@ public class RunningFinishActivity extends AlertableAppCompatActivity {
             }
         });
         //更新历史纪录表
-        HttpUtil.sendOkHttpRequest("http://"+ Constants.url+":8080/addHistory",jsonContext1, new okhttp3.Callback() {
+        HttpUtil.sendOkHttpRequest("http://"+ Constants.url+"/addHistory",jsonContext1, new okhttp3.Callback() {
             @Override
             public void onFailure(okhttp3.Call call, IOException e) {
                 Looper.prepare();

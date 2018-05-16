@@ -32,5 +32,5 @@ public class Constants {
 	public static final LatLng ZHENGZHOU = new LatLng(34.7466, 113.625367);// 郑州市经纬度
 
 	//服务器地址
-	public static  final String url = "10.206.5.79";
+	public static  final String url = "114.115.154.47:8080/RunningPlanner";
 }
