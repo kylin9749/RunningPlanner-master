@@ -1,6 +1,5 @@
 package cn.bupt.runningplanner.classes.HomePage;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 
@@ -10,20 +9,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import cn.bupt.runningplanner.Dialog;
-import cn.bupt.runningplanner.MainActivity;
 import cn.bupt.runningplanner.R;
 
 import java.util.List;
 
-import static android.support.v4.content.ContextCompat.startActivity;
-import static java.security.AccessController.getContext;
+public class DongtaiAdapter extends RecyclerView.Adapter<DongtaiAdapter.ViewHolder> {
 
-public class waterfulAdapter extends RecyclerView.Adapter<waterfulAdapter.ViewHolder> {
-
-    private List<waterfulItem> mItemList;
+    private List<DongtaiItem> mItemList;
     private Context mContext;
     static class ViewHolder extends RecyclerView.ViewHolder{
 
@@ -36,7 +30,7 @@ public class waterfulAdapter extends RecyclerView.Adapter<waterfulAdapter.ViewHo
         }
     }
 
-    public waterfulAdapter(List<waterfulItem> ItemList,Context context){
+    public DongtaiAdapter(List<DongtaiItem> ItemList, Context context){
         mItemList=ItemList;
         mContext = context;
     }
@@ -53,7 +47,7 @@ public class waterfulAdapter extends RecyclerView.Adapter<waterfulAdapter.ViewHo
             @Override
             public void onClick(View v) {
                 int position = holder.getAdapterPosition();
-                waterfulItem fruit = mItemList.get(position);
+                DongtaiItem fruit = mItemList.get(position);
 
                 Intent intent=new Intent(mContext,Dialog.class);//你要跳转的界面
                 mContext.startActivity(intent);
@@ -63,7 +57,7 @@ public class waterfulAdapter extends RecyclerView.Adapter<waterfulAdapter.ViewHo
             @Override
             public void onClick(View v) {
                 int position = holder.getAdapterPosition();
-                waterfulItem fruit = mItemList.get(position);
+                DongtaiItem fruit = mItemList.get(position);
                // Toast.makeText(v.getContext(), "you clicked image " + fruit.getName(), Toast.LENGTH_SHORT).show();
                 Intent intent=new Intent(mContext,Dialog.class);//你要跳转的界面
                 mContext.startActivity(intent);
@@ -73,7 +67,7 @@ public class waterfulAdapter extends RecyclerView.Adapter<waterfulAdapter.ViewHo
     }
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        waterfulItem item = mItemList.get(position);
+        DongtaiItem item = mItemList.get(position);
         holder.imageView.setImageResource(item.getImageId());
         holder.textView.setText(item.getTitle());
     }

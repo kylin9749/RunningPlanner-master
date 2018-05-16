@@ -4,12 +4,8 @@ package cn.bupt.runningplanner.fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,11 +17,7 @@ import android.widget.TextView;
 import cn.bupt.runningplanner.BodyActivity;
 import cn.bupt.runningplanner.HistoryActivity;
 import cn.bupt.runningplanner.LoginandRegister;
-import cn.bupt.runningplanner.MainActivity;
 import cn.bupt.runningplanner.R;
-import cn.bupt.runningplanner.auth.LoginFragment;
-
-import static cn.bupt.runningplanner.LoginandRegister.helper;
 
 
 /**
@@ -49,19 +41,11 @@ public class MovieFragment extends Fragment implements View.OnClickListener {
         LinearLayout history = (LinearLayout)view.findViewById(R.id.history_list);
         Button button = (Button)view.findViewById(R.id.logout_button);
         TextView textView = (TextView)view.findViewById(R.id.yonghuming_wode);
-        String mail ="123456789@qq.com";
-        SharedPreferences pref = getContext().getSharedPreferences("data", Context.MODE_PRIVATE);
-        mail= pref.getString("email","123456789@qq.com");
-        SQLiteDatabase db = helper.getWritableDatabase();
 
+        SharedPreferences pref = getContext().getSharedPreferences("userInfo", Context.MODE_PRIVATE);
 
-        Cursor cursor = db.rawQuery("select * from PersonInformation where Email=?", new String[]{mail});
-        boolean result =cursor.moveToNext();
-        if(result){
-            textView.setText(cursor.getString(1));
-            cursor.close();
-            db.close();
-        }
+        textView.setText(pref.getString("name",""));
+
 
         bodyData.setOnClickListener(this);
         history.setOnClickListener(this);

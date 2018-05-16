@@ -12,6 +12,7 @@ import com.amap.api.location.AMapLocationClient;
 import com.amap.api.location.AMapLocationClientOption;
 import com.amap.api.location.AMapLocationListener;
 import com.amap.api.maps.AMap;
+import com.amap.api.maps.AMapUtils;
 import com.amap.api.maps.CameraUpdateFactory;
 import com.amap.api.maps.MapView;
 import com.amap.api.maps.model.LatLng;
@@ -38,22 +39,44 @@ public class RunningNaviActivity extends AlertableAppCompatActivity {
     private long endTime;
     private double tempLength = 10.0;
     private static final double CLOSE_LIMINAL = 100.0;
-    private int testCounter = 0;
+    static int testCounter = 0;
     private int debugTriggerCounter = 0;
     private boolean isDebugMode = false;
-
+    static int times = 0;
+    private int counters = 0;
+    AMapLocation testLocation ;
 
     private View.OnClickListener onClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             switch (v.getId()) {
-                case R.id.debug_button:
+                case R.id.debug_run_button:
                     if (testCounter < routeData.ployPoints.size()) {
                         AMapLocation testLocation = new AMapLocation("北京邮电大学");
                         testLocation.setLatitude(routeData.ployPoints.get(testCounter).latitude - 0.00001);
                         testLocation.setLongitude(routeData.ployPoints.get(testCounter).longitude - 0.00001);
                         aMapLocationListener.onLocationChanged(testLocation);
                         testCounter++;
+                    }
+                    break;
+                case R.id.debug_navi_button:
+                    if (times < 8) {
+                        Intent intent = new Intent();
+                        intent.setClass(self, NaviActivity.class);
+                        intent.putExtra("route_data", new Gson().toJson(routeData));
+                        startActivity(intent);
+                        times ++;
+                        try{
+                                while (testCounter < counters*times/8 ) {
+                                    testLocation = new AMapLocation("北京邮电大学");
+                                    testLocation.setLatitude(routeData.ployPoints.get(testCounter).latitude - 0.00001);
+                                    testLocation.setLongitude(routeData.ployPoints.get(testCounter).longitude - 0.00001);
+                                    aMapLocationListener.onLocationChanged(testLocation);
+                                    testCounter++;
+                            }
+                        }catch (Exception e){
+                            e.printStackTrace();
+                        }
                     }
                     break;
                 case R.id.navi_finish_button:
@@ -77,7 +100,8 @@ public class RunningNaviActivity extends AlertableAppCompatActivity {
                         alert(new AlertMessage("debug mode", ""));
                         aMapLocationClient.stopLocation();
                         isDebugMode = true;
-                        ((Button) findViewById(R.id.debug_button)).setVisibility(View.VISIBLE);
+                        ( findViewById(R.id.debug_navi_button)).setVisibility(View.VISIBLE);
+                        ( findViewById(R.id.debug_run_button)).setVisibility(View.VISIBLE);
                     }
                     break;
                 default:
@@ -92,6 +116,7 @@ public class RunningNaviActivity extends AlertableAppCompatActivity {
         setContentView(R.layout.activity_running_navi);
         this.setTitle("跑步中");
         routeData = new Gson().fromJson(getIntent().getStringExtra("route_data"), RouteData.class);
+        counters = routeData.ployPoints.size();
         ((MapView) findViewById(R.id.navi_map)).onCreate(savedInstanceState);
         naviMap = ((MapView) findViewById(R.id.navi_map)).getMap();
         this.startTime = System.currentTimeMillis();
@@ -152,7 +177,8 @@ public class RunningNaviActivity extends AlertableAppCompatActivity {
         aMapLocationClient.setLocationOption(aMapLocationClientOption);
         aMapLocationClient.startLocation();
 
-        ( findViewById(R.id.debug_button)).setOnClickListener(onClickListener);
+        ( findViewById(R.id.debug_navi_button)).setOnClickListener(onClickListener);
+        ( findViewById(R.id.debug_run_button)).setOnClickListener(onClickListener);
         ( findViewById(R.id.navi_finish_button)).setOnClickListener(onClickListener);
         ( findViewById(R.id.navi_length_text_view)).setOnClickListener(onClickListener);
 

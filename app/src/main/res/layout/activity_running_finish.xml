@@ -16,49 +16,69 @@
         android:layout_weight="6"
         card_view:cardCornerRadius="4dp">
 
-        <LinearLayout
+        <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/a1"
             android:orientation="vertical">
+
             <LinearLayout
+                android:id="@+id/linearLayout4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:orientation="vertical">
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="2dp"
+                android:orientation="vertical"
+                card_view:layout_constraintEnd_toEndOf="parent"
+                card_view:layout_constraintStart_toStartOf="parent"
+                card_view:layout_constraintTop_toTopOf="parent">
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="15dp"
-                    android:text="------------分享到------------"/>
+                    android:text="------------分享到------------"
+                    android:textSize="15sp" />
+
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal">
+
                     <de.hdodenhof.circleimageview.CircleImageView
                         android:id="@+id/qq1"
                         android:layout_width="30dp"
                         android:layout_height="30dp"
                         android:layout_marginLeft="15dp"
                         android:src="@mipmap/qq" />
+
                     <de.hdodenhof.circleimageview.CircleImageView
                         android:id="@+id/qq2"
                         android:layout_width="30dp"
                         android:layout_height="30dp"
                         android:layout_marginLeft="15dp"
-                        android:src="@mipmap/qq" />
+                        android:src="@mipmap/githubblue" />
+
                     <de.hdodenhof.circleimageview.CircleImageView
                         android:id="@+id/qq3"
                         android:layout_width="30dp"
                         android:layout_height="30dp"
                         android:layout_marginLeft="15dp"
-                        android:src="@mipmap/qq" />
+                        android:src="@mipmap/weibo" />
 
                 </LinearLayout>
             </LinearLayout>
 
-
-        </LinearLayout>
+            <ImageView
+                android:id="@+id/finish_route"
+                android:layout_width="356dp"
+                android:layout_height="304dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                card_view:layout_constraintEnd_toEndOf="parent"
+                card_view:layout_constraintStart_toStartOf="parent"
+                card_view:layout_constraintTop_toBottomOf="@+id/linearLayout4" />
+        </android.support.constraint.ConstraintLayout>
     </android.support.v7.widget.CardView>
 
     <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"

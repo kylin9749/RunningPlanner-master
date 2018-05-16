@@ -1,9 +1,14 @@
 package cn.bupt.runningplanner;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.os.Environment;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.amap.api.maps.AMap;
 import com.amap.api.maps.CameraUpdateFactory;
@@ -16,6 +21,8 @@ import com.amap.api.maps.model.PolylineOptions;
 import com.amap.api.services.core.LatLonPoint;
 import com.amap.api.services.poisearch.PoiSearch;
 import com.google.gson.Gson;
+
+import cn.bupt.runningplanner.Util.Transform;
 import cn.bupt.runningplanner.classes.HomePage.alert.AlertMessage;
 import cn.bupt.runningplanner.classes.HomePage.alert.AlertableAppCompatActivity;
 import cn.bupt.runningplanner.classes.HomePage.routes.Merchant;
@@ -24,10 +31,15 @@ import cn.bupt.runningplanner.classes.HomePage.routes.RouteData;
 import cn.bupt.runningplanner.classes.HomePage.routes.RouteGenerate;
 import cn.bupt.runningplanner.classes.HomePage.routes.RouteSchematicDiagramLayout;
 
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 
-public class RouteSelectActivity extends AlertableAppCompatActivity {
+public class RouteSelectActivity extends AlertableAppCompatActivity implements AMap.OnMapScreenShotListener {
 
     public RouteSelectActivity self = this;
     private Bundle savedInstanceState;
@@ -44,6 +56,8 @@ public class RouteSelectActivity extends AlertableAppCompatActivity {
     //marker-merchant map
     private HashMap<Marker, Merchant> markerMerchantHashMap = new HashMap<Marker, Merchant>();
 
+    //高德
+    AMap amap;
     private View.OnClickListener onClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -52,6 +66,11 @@ public class RouteSelectActivity extends AlertableAppCompatActivity {
                     if (selectedDiagram == null) {
                         alert(new AlertMessage("错误", "请先选择路线再点击开始"));
                     } else {
+                        /**
+                         * 对地图进行截屏
+                         */
+                        amap.getMapScreenShot(self);
+
                         Intent intent = new Intent();
                         intent.putExtra("route_data", new Gson().toJson(selectedDiagram.getRouteData()));
                         intent.setClass(self, RunningNaviActivity.class);
@@ -90,7 +109,8 @@ public class RouteSelectActivity extends AlertableAppCompatActivity {
                             polylineOptions.setPoints(routeDataToDraw.ployPoints);
                             mainMapView.getMap().addPolyline(polylineOptions);
                             mainMapView.getMap().moveCamera(CameraUpdateFactory.changeLatLng(routeDataToDraw.centerPoint));
-                            mainMapView.getMap().moveCamera(CameraUpdateFactory.zoomTo(13));
+                            mainMapView.getMap().moveCamera(CameraUpdateFactory.zoomTo(15));
+                            amap = mainMapView.getMap();
                             selectedDiagram = diagram;
                             break;
                         }
@@ -129,8 +149,11 @@ public class RouteSelectActivity extends AlertableAppCompatActivity {
         this.mainMapView = (MapView) findViewById(R.id.main_map);
         this.routeSchemaDiagramContainer = (LinearLayout) findViewById(R.id.route_schema_diagram_container);
         this.mainMapView.onCreate(savedInstanceState);
-        mainMapView.getMap().setOnMarkerClickListener(onMarkerClickListener);
+        amap =mainMapView.getMap();
+        amap.setOnMarkerClickListener(onMarkerClickListener);
         searchRoute();
+
+        //将
     }
 
     public void addSchematicDiagram(RouteSchematicDiagramLayout routeSchematicDiagramLayout) {
@@ -144,7 +167,7 @@ public class RouteSelectActivity extends AlertableAppCompatActivity {
     }
 
 
-    PoiSearch.Query query;
+//    PoiSearch.Query query;
     //使用poi搜索搜索该点周围的标志性建筑物，然后替换该点
 //    public void poiSearch(LatLng point){
 //        //使用poi搜索将点拉取到附近的标志性建筑物
@@ -202,6 +225,60 @@ public class RouteSelectActivity extends AlertableAppCompatActivity {
                 RouteGenerate.EAST,
                 self
         );
+
+    }
+
+    @Override
+    public void onMapScreenShot(Bitmap bitmap) {
+
+    }
+
+    @Override
+    public void onMapScreenShot(Bitmap bitmap, int arg1) {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
+        if(null == bitmap){
+            return;
+        }
+        try {
+            String route =Environment.getExternalStorageDirectory() + "/test_" + sdf.format(new Date()) + ".png";
+            String fileName = "/test_" + sdf.format(new Date()) + ".png";
+            FileOutputStream fos = new FileOutputStream(route);
+
+            boolean b = bitmap.compress(Bitmap.CompressFormat.PNG, 100, fos);
+
+            //将当前数据写入sharedpreference
+            SharedPreferences sharedPreferences = getSharedPreferences("routeInfo", Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = sharedPreferences.edit();//获取编辑器
+            editor.putString("route",fileName);
+
+            editor.apply();//提交修改
+
+            try {
+                fos.flush();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            try {
+                fos.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            StringBuffer buffer = new StringBuffer();
+            if (b)
+                buffer.append("截屏成功 ");
+            else {
+                buffer.append("截屏失败 ");
+            }
+            if (arg1 != 0)
+                buffer.append("地图渲染完成，截屏无网格");
+            else {
+                buffer.append( "地图未渲染完成，截屏有网格");
+            }
+
+            Toast.makeText(RouteSelectActivity.this,buffer.toString(),Toast.LENGTH_SHORT).show();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
 
     }
 }

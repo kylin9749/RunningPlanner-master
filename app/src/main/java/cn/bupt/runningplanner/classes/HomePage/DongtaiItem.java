@@ -1,10 +1,10 @@
 package cn.bupt.runningplanner.classes.HomePage;
 
-public class waterfulItem {
+public class DongtaiItem {
     private String Title;
     private int ImageId;
 
-    public  waterfulItem(String title,int imageId){
+    public DongtaiItem(String title, int imageId){
         this.Title = title;
         this.ImageId = imageId;
     }

@@ -9,7 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import com.ashokvarma.bottomnavigation.BadgeItem;
 import com.ashokvarma.bottomnavigation.BottomNavigationBar;
 import com.ashokvarma.bottomnavigation.BottomNavigationItem;
-import cn.bupt.runningplanner.fragment.HomePageFragment;
+import cn.bupt.runningplanner.fragment.DongtaiFragment;
 import cn.bupt.runningplanner.fragment.MovieFragment;
 import cn.bupt.runningplanner.fragment.MainFragment;
 
@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationB
     private void initViewPager() {
         mList = new ArrayList<>();
         mList.add(new MainFragment());
-        mList.add(new HomePageFragment());
+        mList.add(new DongtaiFragment());
         mList.add(new MovieFragment());
 
 

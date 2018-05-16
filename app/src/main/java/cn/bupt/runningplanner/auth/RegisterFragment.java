@@ -17,6 +17,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import cn.bupt.runningplanner.MainActivity;
 import cn.bupt.runningplanner.R;
+import cn.bupt.runningplanner.Util.Constants;
 import cn.bupt.runningplanner.Util.HttpUtil;
 import cn.bupt.runningplanner.entity.Result;
 import cn.bupt.runningplanner.entity.UserRegisterInfo;
@@ -103,7 +104,7 @@ public class RegisterFragment extends Fragment implements View.OnClickListener{
             }catch (Exception e){
                 e.printStackTrace();
             }
-            HttpUtil.sendOkHttpRequest("http://10.128.202.97:8080/register",jsonContext,new okhttp3.Callback(){
+            HttpUtil.sendOkHttpRequest("http://"+ Constants.url+":8080/register",jsonContext,new okhttp3.Callback(){
 
                 @Override
                 public void onFailure(Call call, IOException e) {

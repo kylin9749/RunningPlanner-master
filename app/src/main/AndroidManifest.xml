@@ -52,13 +52,16 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name=".RunningPreparationActivity" />
-        <activity android:name=".RouteSelectActivity" />
-        <activity android:name=".RunningNaviActivity" />
-        <activity android:name=".RunningFinishActivity" />
-        <activity android:name=".HistoryActivity" />
-        <activity android:name=".BodyActivity" />
-        <activity android:name=".TestAlgorithmActivity"></activity>
+        <activity android:name=".RunningPreparationActivity" android:launchMode="singleTask"/>
+        <activity android:name=".RouteSelectActivity" android:launchMode="singleTask"/>
+        <activity android:name=".RunningNaviActivity" android:launchMode="singleTask"/>
+        <activity android:name=".RunningFinishActivity" android:launchMode="singleTask"/>
+        <activity android:name=".HistoryActivity" android:launchMode="singleTask"/>
+        <activity android:name=".BodyActivity" android:launchMode="singleTask"/>
+        <activity android:name=".TestAlgorithmActivity" android:launchMode="singleTask"/>
+        <activity android:name=".ModifyInfoActivity" android:launchMode="singleTask"/>
+        <activity android:name=".ModifySex" android:launchMode="singleTask"/>
+        <activity android:name=".NaviActivity" android:launchMode="singleTask"/>
     </application>
 
 </manifest>

@@ -29,6 +29,7 @@ import java.util.Random;
 
 import cn.bupt.runningplanner.R;
 import cn.bupt.runningplanner.RunningPreparationActivity;
+import cn.bupt.runningplanner.Util.Constants;
 import cn.bupt.runningplanner.Util.HttpUtil;
 import cn.bupt.runningplanner.entity.Result;
 import cn.bupt.runningplanner.entity.UserInfo;
@@ -76,7 +77,7 @@ public class MainFragment extends Fragment implements View.OnClickListener {
             e.printStackTrace();
         }
 
-        HttpUtil.sendOkHttpRequest("http://10.128.202.97:8080/show",jsonContext,new okhttp3.Callback() {
+        HttpUtil.sendOkHttpRequest("http://"+ Constants.url+":8080/show",jsonContext,new okhttp3.Callback() {
 
             @Override
             public void onFailure(Call call, IOException e) {

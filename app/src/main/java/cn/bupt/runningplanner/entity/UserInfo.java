@@ -17,7 +17,11 @@ public class UserInfo {
     //判断上传数据的源  来自哪里
     private int updateSource;
     // 1代表跑步完成界面
-    // 0代表更新用户信息界面
+    // 2代表修改name
+    // 3代表修改年龄
+    // 4代表修改身高
+    // 5代表修改体重
+    // 6代表修改年龄
 
     public String getName() {
         return name;
