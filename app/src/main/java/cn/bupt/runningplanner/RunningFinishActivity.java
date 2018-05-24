@@ -104,7 +104,7 @@ public class RunningFinishActivity extends AlertableAppCompatActivity {
 
         ((TextView) findViewById(R.id.length_text_view)).setText("" + runningData.length + "米");
         ((TextView) findViewById(R.id.time_text_view)).setText(timeFormat(runningData.endTime - runningData.startTime));
-        ((TextView) findViewById(R.id.kalorie_txt_view)).setText((new DecimalFormat("######0.00")).format((double) preferences.getInt("weight",0)* 1.036 / runningData.length ) + "千卡");
+        ((TextView) findViewById(R.id.kalorie_txt_view)).setText((new DecimalFormat("######0.00")).format((double) preferences.getInt("weight",0)* 1.036 * runningData.length/1000 ) + "千卡");
 
 
         //通过http将数据写入数据库

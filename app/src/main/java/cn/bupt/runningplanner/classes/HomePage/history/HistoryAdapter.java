@@ -71,7 +71,7 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
         holder.time.setText(new Long(time).toString());
         holder.date.setText(date);
 
-        }
+    }
 
     @Override
     public int getItemCount() {
