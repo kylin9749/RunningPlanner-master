@@ -107,6 +107,23 @@ public class RunningFinishActivity extends AlertableAppCompatActivity {
         ((TextView) findViewById(R.id.kalorie_txt_view)).setText((new DecimalFormat("######0.00")).format((double) preferences.getInt("weight",0)* 1.036 * runningData.length/1000 ) + "千卡");
 
 
+        this.runningData = new Gson().fromJson(getIntent().getStringExtra("running_data"), RunningData.class);
+
+        // 显示完成后的运动路线
+        ((MapView) findViewById(R.id.finish_map)).onCreate(savedInstanceState);
+        this.map = ((MapView) findViewById(R.id.finish_map)).getMap();
+        PolylineOptions polylineOptions = new PolylineOptions();
+        polylineOptions.setPoints(runningData.ployPoints);
+        this.map.addPolyline(polylineOptions);
+        MarkerOptions startMarker = new MarkerOptions().position(runningData.ployPoints.get(0));
+        MarkerOptions endMarker = new MarkerOptions().position(runningData.ployPoints.get(runningData.ployPoints.size() - 1));
+        this.map.addMarker(startMarker);
+        this.map.addMarker(endMarker);
+        this.map.moveCamera(CameraUpdateFactory.changeLatLng(runningData.centerPoint));
+        this.map.moveCamera(CameraUpdateFactory.zoomTo(16));
+        this.map.getUiSettings().setAllGesturesEnabled(false);
+        this.map.getUiSettings().setZoomControlsEnabled(false);
+
         //通过http将数据写入数据库
         //用户信息表
         cn.bupt.runningplanner.entity.UserInfo userInfoWrite = new cn.bupt.runningplanner.entity.UserInfo();

@@ -264,15 +264,17 @@ public class RouteSelectActivity extends AlertableAppCompatActivity implements A
                 e.printStackTrace();
             }
             StringBuffer buffer = new StringBuffer();
-            if (b)
-                buffer.append("截屏成功 ");
-            else {
-                buffer.append("截屏失败 ");
+            if (b) {
+//                buffer.append("截屏成功 ");
             }
-            if (arg1 != 0)
-                buffer.append("地图渲染完成，截屏无网格");
             else {
-                buffer.append( "地图未渲染完成，截屏有网格");
+//                buffer.append("截屏失败 ");
+            }
+            if (arg1 != 0) {
+//                buffer.append("地图渲染完成，截屏无网格");
+            }
+            else {
+//                buffer.append( "地图未渲染完成，截屏有网格");
             }
 
             Toast.makeText(RouteSelectActivity.this,buffer.toString(),Toast.LENGTH_SHORT).show();
